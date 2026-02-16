@@ -1,0 +1,24 @@
+<?php
+class Moviemodel extends CI_Model {
+
+    public function __construct() {
+        $this->load->database();
+    }
+
+    public function getByGenre($genre) {
+        $this->db->where('genre', $genre);
+        $query = $this->db->get('films');
+
+        if($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return false;
+        }
+    }
+
+    public function getAllMovies() {
+        $query = $this->db->get('films');
+        return $query->result();
+    }
+}
+?>
