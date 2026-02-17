@@ -4,8 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Guesses extends CI_Model {
     private $names = array('Taylor Swift',"Lionel Messi","Dwayne Johnson","Brad Pitt","Rihanna");
     // the images must be in the same order as the names
-    private $imageurls
-       = array(
+    private $imageurls= array(
         'https://variety.com/wp-content/uploads/2025/09/GettyImages-2166934862.jpg?w=1000&h=667&crop=1',
         'https://pmcwwd.files.wordpress.com/2019/05/messi-1.jpg?w=640&h=415&crop=1',
         'https://static.independent.co.uk/s3fs-public/thumbnails/image/2018/06/11/14/gettyimages-453906200.jpg?w968h681',
