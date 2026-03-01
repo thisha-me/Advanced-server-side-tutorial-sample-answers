@@ -3,7 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Cats extends CI_Controller {
 
-	const SESSION_CATS_KEY = 'cats';
 	const MAX_REMEMBERED = 3;
 
 	public function __construct() {
@@ -13,7 +12,8 @@ class Cats extends CI_Controller {
 
 	public function index() {
 		$cat = $this->Catmodel->getRandom();
-		$session_cats = $this->session->userdata(self::SESSION_CATS_KEY);
+		
+		$session_cats = $this->Catmodel->loadSession($this->session->session_id);
 		if (!is_array($session_cats)) $session_cats = array();
 		$session_cats = array_reverse($session_cats); // newest first for display
 		$lastviewed_cats = $this->Catmodel->getcats($session_cats);
@@ -47,13 +47,13 @@ class Cats extends CI_Controller {
 	 * Remember a cat in session; keep only last 3 (slide: append, then shift if > 3).
 	 */
 	public function remembercat($catid) {
-		$remembered_cats = $this->session->userdata(self::SESSION_CATS_KEY);
+		$remembered_cats = $this->Catmodel->loadSession($this->session->session_id);
 		if (!is_array($remembered_cats)) $remembered_cats = array();
 		$remembered_cats[] = $catid;
 		if (count($remembered_cats) > self::MAX_REMEMBERED) {
 			array_shift($remembered_cats);
 		}
-		$this->session->set_userdata(self::SESSION_CATS_KEY, $remembered_cats);
+		$this->Catmodel->storeSession($this->session->session_id, $catid);
 	}
 
 }
