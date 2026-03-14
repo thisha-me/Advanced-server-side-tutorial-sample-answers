@@ -15,3 +15,13 @@ INSERT INTO cats (name, image_url, like_count, dislike_count) VALUES
 ('Mittens', 'https://placekitten.com/403/403', 0, 0),
 ('Luna', 'https://placekitten.com/404/404', 0, 0),
 ('Oreo', 'https://placekitten.com/405/405', 0, 0);
+
+-- Table used by Catmodel::storeSession / loadSession
+CREATE TABLE sessions (
+  id            INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  session_id    VARCHAR(128) NOT NULL,
+  cat_id        INT UNSIGNED NOT NULL,
+  timestamp     INT UNSIGNED NOT NULL,
+  PRIMARY KEY (id),
+  KEY session_id (session_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
